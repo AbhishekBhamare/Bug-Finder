@@ -1,0 +1,62 @@
+{
+  "name": "bug-finder",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
+    "@testing-library/jest-dom": "^5.13.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "bootstrap": "^5.0.2",
+    "dropdown": "^0.2.0",
+    "firebase": "^8.6.5",
+    "from": "^0.1.7",
+    "history": "^5.0.0",
+    "jquery": "^3.6.0",
+    "js-cookie": "^2.2.1",
+    "moment": "^2.29.1",
+    "multiselect-react-dropdown": "^1.7.0",
+    "react": "^17.0.2",
+    "react-cookie": "^4.0.3",
+    "react-dom": "^17.0.2",
+    "react-dropdown": "^1.9.2",
+    "react-font": "^1.2.1",
+    "react-icons": "^4.2.0",
+    "react-notifications-menu": "^1.0.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "react-select": "^4.3.1",
+    "reactstrap": "^8.9.0",
+    "rom": "^0.2.2",
+    "sweetalert": "^2.1.2",
+    "web-vitals": "^1.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.7.0"
+  }
+}
