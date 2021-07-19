@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Dialog, DialogTitle, DialogContent, Button, Divider, TextField, makeStyles } from '@material-ui/core'
-// import Select from 'react-select';
 import firebase from '../components/firebase'
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -69,10 +68,8 @@ export default function IssueForm(props) {
         taskObj['Description'] = description
         taskObj['Priority'] = priority
         saveCard(taskObj) 
-        // setSelected(temp)
         getIDs()
         if(snapshot.Role === 'Tester'){
-            console.log("testeerrrrrrrrrrr ",taskObj, issueId)
             getAdminId()
             notificationDoc(taskObj, issueId);
         }
@@ -86,19 +83,16 @@ export default function IssueForm(props) {
     }
 
     async function notificationDoc(taskObj, issueId){
-        console.log(adminId, taskObj.Title, taskObj.Description, taskObj.Priority, issueId)
         await firebase.createNotificationTicketDoc(adminId, taskObj.Title, taskObj.Description, taskObj.Priority, issueId)
     }
 
     async function assignTicket(taskObj, issueId){
         if(snapshot.Role === 'Admin'){
             for(let i=0; i<IDs.length; ++i){
-                console.log("tmeo",IDs[i])
                 await firebase.createTicketDoc(IDs[i], taskObj.Title, taskObj.Description, taskObj.Priority, issueId)
             }
         }else if(snapshot.Role === 'Tester'){
             getAdminId()
-            console.log(adminId)
             await firebase.createTicketDoc(adminId, taskObj.Title, taskObj.Description, taskObj.Priority, issueId)
         }
       }    
@@ -122,17 +116,14 @@ export default function IssueForm(props) {
             }
         }
         selected.splice(index, 1)
-        console.log(selected)
         setSelected(selected)
     }
 
     useEffect( async () => {
-        // getAdminId()
         let response1 = []
         await firebase.db.collection('projects').doc(currentUserId).collection('MyTickets').get().then((querySnapshot) => {
             querySnapshot.forEach((doc) =>{
                 let temp = doc.data();
-                // console.log( "xxxxsdjvsfbvoibsuirwbvaoevbaov",`${doc.id}`)
                 temp['id'] =  `${doc.id}`
                 response1.push(temp)
             })
@@ -154,7 +145,6 @@ export default function IssueForm(props) {
         await firebase.db.collection('projects').doc(currentUserId).collection('MyTickets').get().then((querySnapshot) => {
             querySnapshot.forEach((doc) =>{
                 response.push(doc.data())
-                // console.log("proj",doc.data());
             })
             setData(response)
         })
@@ -172,11 +162,6 @@ export default function IssueForm(props) {
         setEditForm(true)
     }
 
-    // console.log("dataissue", selected)
-    // console.log("data", data);
-    // data.map((proj) => {
-    //     console.log(proj);
-    // })
     return (
         <>
         <Dialog open={openForm} maxWidth="md" classes={ {paper: classes.dialogWrapper} } onClose={handleClose}>
@@ -241,7 +226,6 @@ export default function IssueForm(props) {
                         }}
                         defaultValue="Select Role"
                         onChange={(e) => setPriority(e.target.value)}
-                        // ref={selectInputRef}
                         required>
                             <MenuItem value="Low">Low</MenuItem> 
                             <MenuItem value="Medium">Medium</MenuItem>
@@ -311,11 +295,9 @@ export default function IssueForm(props) {
           overflow:"hidden",
       }}>
         <TableHead style={{
-            // display:"block",
             width:"100%",
         }}>
           <TableRow style={{
-            //   display:"block",
               backgroundColor:"orange",
           }}>
             <TableCell align="left">PROJECT TITLE</TableCell>

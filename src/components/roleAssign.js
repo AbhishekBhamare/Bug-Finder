@@ -38,12 +38,7 @@ function Role({allUser, snapshot}) {
                 marginTop:"100px",
                 backgroundColor:"#deeaee",
                 boxShadow:"8px 8px 12px grey",
-                }}><h1 style={
-                    {
-                        // display:"flex",
-                        // justifyContent:"center",
-                    }
-                }>Assign Role</h1><br/>
+                }}><h1>Assign Role</h1><br/>
                 <Divider style={{
                     backgroundColor: "#111",
                 }}/>

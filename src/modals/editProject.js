@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Dialog, DialogTitle, DialogContent, Button, Divider, TextField, makeStyles } from '@material-ui/core'
-// import Select from 'react-select';
 import firebase from '../components/firebase'
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -44,7 +43,6 @@ export default function EditProjectForm(props) {
             }
         }
         selected.splice(index, 1)
-        // console.log(selected)
         setSelected(selected)
     }
 
@@ -64,7 +62,6 @@ export default function EditProjectForm(props) {
         e.preventDefault()
       
         getIDS();
-        // console.log(IDs)
         updateData();
         assignProject();
         setSelected([])
@@ -73,26 +70,21 @@ export default function EditProjectForm(props) {
     function getIDS(){
         allUser.map((user) => {
             if(selected.includes(user.Name)){
-                // console.log(user.id)
                 IDs.push(user.id)
             }
         })
-        // console.log(IDs)
     }
     async function updateData(){
-        // console.log(editData);
         await firebase.updateProjectDoc(currentUserId, title, description, status, editData.id);
         setEditForm(false)
     }
 
     async function  assignProject(){
         for(let i=0; i<IDs.length; ++i){
-        // console.log("updateDataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",IDs[i], title, description, status, editData.id)
         await firebase.updateProjectDoc(IDs[i], title, description, status, editData.id);
         }
     }
 
-    console.log("editData",selected);
     return (
         <>
             <Dialog open={openEditForm} maxWidth="md" classes={ {paper: classes.dialogWrapper}} onClose={handleClose}>
@@ -118,7 +110,6 @@ export default function EditProjectForm(props) {
                     justifyContent:"start",
                     width:"100%",
                     padding:"20px",
-                    // height:"450px",
                 }}>
                     <TextField id="outlined-basic" label="Project Title" value={title} defaultValue={editData.Title} name="title" onChange={handleInputChange} style={{
                         color:"#111",
@@ -176,7 +167,6 @@ export default function EditProjectForm(props) {
                         }}
                         defaultValue="Status"
                         onChange={(e) => setStatus(e.target.value)}
-                        // ref={selectInputRef}
                         required>
                             <MenuItem value="INPROGRESS">INPROGRESS</MenuItem> 
                             <MenuItem value="COMPLETED">COMPLETED</MenuItem>       

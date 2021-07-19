@@ -27,10 +27,7 @@ export default function SignUp() {
     try{
       const user_data = await firebase.register(getMail, getPass, name) 
 
-      // console.log("heteerererwet",name, getMail)
       await firebase.createUserDoc(user_data, name, getMail);
-
-      // console.log(user_data)
   
       swal("Good job!", "Registered Successfully", "success");
       history.push('./login')

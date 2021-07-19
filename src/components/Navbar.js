@@ -27,11 +27,9 @@ function Navbar() {
     async function Logout(){
        try{
         await firebase.logout()
-        // console.log("Logged out")
         Cookies.remove("user")
         history.push("/")
        } catch(e){
-        // console.log(e.message)
        }
         
     }
@@ -58,8 +56,6 @@ function Navbar() {
 
         
     }, []);
-    // console.log("all", allUser)
-    // console.log("navbar",reponse)
     return (
 
     <>

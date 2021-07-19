@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Dialog, DialogTitle, DialogContent, Button, Divider, TextField, makeStyles } from '@material-ui/core'
-// import Select from 'react-select';
 import firebase from '../components/firebase'
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -28,7 +27,6 @@ const useStyles = makeStyles(theme =>({
 
 export default function ProjectForm(props) {
     const { openForm, setForm, allUser, snapshot, currentUserId, data, setData} = props;
-    // console.log("dsgss", allUser)
     const classes = useStyles();
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
@@ -66,7 +64,6 @@ export default function ProjectForm(props) {
         saveCard(taskObj)
         setSelected(temp)
         getIDs()
-        // console.log("multi",selected)
         projectDocument(taskObj, projId)
         assignProj(taskObj, projId)
         setForm(false)
@@ -75,7 +72,6 @@ export default function ProjectForm(props) {
 
     async function assignProj(taskObj, projId){
         for(let i=0; i<IDs.length; ++i){
-            // console.log("tmeo",IDs[i])
             await firebase.createProjectDoc(IDs[i], taskObj.Title, taskObj.Description, projId)
         }
       }
@@ -84,11 +80,9 @@ export default function ProjectForm(props) {
     function getIDs(){
         allUser.map((user) => {
             if(selected.includes(user.Name)){
-                // console.log(user.id)
                 IDs.push(user.id)
             }
         })
-        // console.log(IDs)
     }
 
     
@@ -102,7 +96,6 @@ export default function ProjectForm(props) {
             }
         }
         selected.splice(index, 1)
-        // console.log(selected)
         setSelected(selected)
     }
 
@@ -111,12 +104,10 @@ export default function ProjectForm(props) {
         firebase.db.collection('projects').doc(currentUserId).collection('MyProjects').get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 let temp = doc.data();
-                // console.log( "xxxxsdjvsfbvoibsuirwbvaoevbaov",`${doc.id}`)
                 temp['id'] =  `${doc.id}`
                 reponse.push(temp)
             });
             setData(reponse)
-            // console.log("yyyyyydjvsfbvoibsuirwbvaoevbaov",data)
         })
     }, [data])
     async function projectDocument(taskObj, projId){
@@ -130,7 +121,6 @@ export default function ProjectForm(props) {
         })
     }
     function handleEditData(obj){
-        // console.log("he aahe obj",obj);
         setEditData(obj)
         setEditForm(true)
     }
@@ -147,7 +137,6 @@ export default function ProjectForm(props) {
         }
     })
 
-    // console.log("tepm",data)
     return (
         <>
         <Dialog open={openForm} maxWidth="md" classes={ {paper: classes.dialogWrapper} } onClose={handleClose}>
@@ -164,7 +153,6 @@ export default function ProjectForm(props) {
                 display:"flex",
                 flexDirection:"column",
                 justifyContent:"start",
-                // overflow:"hidden",
             }}> 
            
                 <form style={{
@@ -173,7 +161,6 @@ export default function ProjectForm(props) {
                     justifyContent:"start",
                     width:"100%",
                     padding:"20px",
-                    // height:"450px",
                 }}>
                     <TextField id="outlined-basic" label="Project Title" value={title} name="title" onChange={handleInputChange} style={{
                         color:"#111",
@@ -241,11 +228,9 @@ export default function ProjectForm(props) {
           overflow:"hidden",
       }}>
         <TableHead style={{
-            // display:"block",
             width:"100%",
         }}>
           <TableRow style={{
-            //   display:"block",
               backgroundColor:"orange",
           }}>
             <TableCell align="left">PROJECT TITLE</TableCell>

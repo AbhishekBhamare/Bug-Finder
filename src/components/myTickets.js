@@ -1,15 +1,10 @@
 import React,{ useState, useEffect } from 'react'
 import { Button  } from "@material-ui/core";
-// import { Add } from "@material-ui/icons"
 import '../component.css'
-// import ProjectForm from '../modals/projectForm';
 import firebase from './firebase';
 import IssueForm from '../modals/issueForm';
 import * as FaIcons  from "react-icons/fa"
-import MenuItem from "@material-ui/core/MenuItem";
-import {Dropdown,  DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap'
-import Select from "@material-ui/core/Select";
-import Notifications from "react-notifications-menu";
+import {Dropdown, DropdownMenu} from 'reactstrap'
 import NotificationForm from '../modals/notificationForm';
 
 
@@ -24,14 +19,11 @@ export default function MyTickets({allUser, snapshot, currentUserId}) {
 
     let response = []
     useEffect(() => {
-        console.log("wefbra;sibvriubvrwiuabviruvbr eiubrsvirobnreoibriobreioe")
         const loadProject= async () => {
             try{
                 await firebase.db.collection('projects').doc(currentUserId).collection('MyProjects').get().then((querySnapshot) => {
                     querySnapshot.forEach((doc) =>{
                         response.push(doc.data())
-                        console.log("proj",doc.data());
-
                     })
                     setData(response)
                 })
@@ -42,9 +34,7 @@ export default function MyTickets({allUser, snapshot, currentUserId}) {
                         })
                         setNotification(reponse1)
                 })
-                console.log("res",response)
             }catch(e){
-                console.log(e.messege);
             }
         }
         loadProject()
@@ -55,7 +45,6 @@ export default function MyTickets({allUser, snapshot, currentUserId}) {
         setNotificationForm(true)
     }
 
-    console.log("myticketsdkn", showNoti, notification)
     return (
     <> 
     <div style={{
@@ -85,7 +74,6 @@ export default function MyTickets({allUser, snapshot, currentUserId}) {
              showNoti.length > 0 ?  <Dropdown  style={{
                 position:"absolute",
                 padding:"2px",
-                // width:"60px",
                 zIndex:"10",
                 marginLeft:"-120px",
                 border:"0.6px solid #111",
@@ -115,7 +103,6 @@ export default function MyTickets({allUser, snapshot, currentUserId}) {
                 backgroundColor:"green",
                 color:"#fff",
                 padding:"1px",
-                // width:"20p"
             }}onClick={() => getNotificationDoc(proj)}>View</Button>    
             </DropdownMenu>
         )
@@ -126,7 +113,6 @@ export default function MyTickets({allUser, snapshot, currentUserId}) {
            <div style={{
             display:"flex",
             flexDirection:"column",
-            // border:"black solid",
             margin:"50px",
             width:"100%",
             padding:"20px",
@@ -139,7 +125,6 @@ export default function MyTickets({allUser, snapshot, currentUserId}) {
                     display:"flex",
                     justifyContent:"center",
                     flexDirection:"column",
-                    // border:"black solid",
                     padding:"10px",
                 }}><h1 style={{
                     margin:"25px",
@@ -156,7 +141,6 @@ export default function MyTickets({allUser, snapshot, currentUserId}) {
             
            </div>
            <div style={{
-            //    border:"1px black solid",
                margin:"4px 4px",
                backgroundColor:"#fff",
                width:"100%",
@@ -182,7 +166,6 @@ export default function MyTickets({allUser, snapshot, currentUserId}) {
               currentUserId={currentUserId}    
               getNotif = {getNotif} 
               setNotif = {setNotif} 
-        
         /> 
            </div>
         </div>

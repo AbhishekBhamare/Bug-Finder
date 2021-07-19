@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { Dialog, DialogTitle, DialogContent, Button, Divider, TextField, makeStyles } from '@material-ui/core'
+import React, { useState } from 'react'
+import { Dialog, Button } from '@material-ui/core'
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -39,7 +39,6 @@ export default function NotificationForm(props) {
         deleteDoc()
     }
     async function createDoc(){
-        console.log(currentUserId, getNotif.Title, getNotif.Description, getNotif.Priority, getNotif.id)
         await firebase.createTicketDoc(currentUserId, getNotif.Title, getNotif.Description, getNotif.Priority, getNotif.id)
     }
     
@@ -49,19 +48,15 @@ export default function NotificationForm(props) {
        }
     }
     async function deleteDoc(){
-        console.log("Document successfully deleted!");
         await firebase.DeleteNotificationDoc(currentUserId, getNotif.id)
     } 
     function getIDs(){
         allUser.map((user) => {
             if(selected.includes(user.Name)){
-                // console.log(user.id)
                 IDs.push(user.id)
             }
         })
-        // console.log(IDs)
     }
-    console.log("selected",IDs);
     return (
     <>
     <Dialog open={showNotificationForm} maxWidth="md" onClose={handleClose}>
@@ -77,7 +72,6 @@ export default function NotificationForm(props) {
                     justifyContent:"center",
                     borderBottom:"1px solid #111",
                     padding:"10px",
-                    // margin:"10px"
                 }}>
                     <Typography style={{
                         fontSize:"40px",

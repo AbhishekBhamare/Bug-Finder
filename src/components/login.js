@@ -9,9 +9,7 @@ import swal from 'sweetalert';
 
 
 export default function Login() {
-    
-  // const [user, setUser] = useState('')
-   
+       
    const [getMail, setMail] = useState('')
    const [getPass, setPass] = useState('')
    let history = useHistory();
@@ -20,18 +18,13 @@ export default function Login() {
     async function Login(){
 
      try{
-       console.log(getMail, getPass)
        const user = await firebase.login(getMail, getPass)
-
-       console.log(user.uid)
      
-      console.log("logged in")
       Cookies.set("user", "loginTrue")
       history.push('/navbar')
       
 
      }catch(e){
-       console.log("not")
        swal({
         title: "Falied",
         text: "Register before login",

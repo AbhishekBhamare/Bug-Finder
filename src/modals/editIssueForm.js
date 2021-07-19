@@ -38,7 +38,6 @@ export default function EditIssueForm(props) {
             }
         }
         selected.splice(index, 1)
-        // console.log(selected)
         setSelected(selected)
     }
 
@@ -60,7 +59,6 @@ export default function EditIssueForm(props) {
         e.preventDefault()
       
         getIDS();
-        // console.log(IDs)
         updateData();
         assignTicket();
         setSelected([])
@@ -72,17 +70,14 @@ export default function EditIssueForm(props) {
                 IDs.push(user.id)
             }
         })
-        // console.log(IDs)
     }
     async function updateData(){
-        console.log("neeeeeeeeeeeeeeeeeeee",currentUserId, editData.Title, description, priority, status, editData.id);
         await firebase.updateTicketDoc(currentUserId, editData.Title, description, priority, status, editData.id);
         setEditForm(false)
     }
 
     async function  assignTicket(){
         for(let i=0; i<IDs.length; ++i){
-        // console.log("updateDataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",IDs[i], editData.Title, description, status, editData.id)
         await firebase.updateTicketDoc(IDs[i], editData.Title, description, priority,status, editData.id);
         }
     }
@@ -141,7 +136,6 @@ export default function EditIssueForm(props) {
                         }}
                         defaultValue="Select Role"
                         onChange={(e) => setPriority(e.target.value)}
-                        // ref={selectInputRef}
                         required>
                             <MenuItem value="Low">Low</MenuItem> 
                             <MenuItem value="Medium">Medium</MenuItem>
@@ -184,7 +178,6 @@ export default function EditIssueForm(props) {
                         }}
                         defaultValue="Status"
                         onChange={(e) => setStatus(e.target.value)}
-                        // ref={selectInputRef}
                         required>
                             <MenuItem value="INPROGRESS">INPROGRESS</MenuItem> 
                             <MenuItem value="COMPLETED">COMPLETED</MenuItem>       

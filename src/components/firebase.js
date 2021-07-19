@@ -45,14 +45,12 @@ class Firebase{
      async createUserDoc(user, name, email) {
         
          if(!user) return;
-         console.log(name)
          const userRef = this.db.collection('users').doc(user.uid).set({
              Name: name,
              Email: email,
              Role: "Developer",
              RegistrationDate: new Date(),
          }, {merge: true});
-         console.log(userRef)
      }
 
      async createProjectDoc(id, title, desc, projId){
@@ -64,12 +62,10 @@ class Firebase{
             Status: "INPROGRESS",
             ProjectDate: new Date(),
           }, {merge: true});
-         console.log(userRef)
      }
 
      async updateProjectDoc(id, title, desc, status, issueId){
         this.db.collection('projects').doc(id).collection('MyProjects').doc(`${issueId}`).update({
-            // id:docId,
             Title:title,
             Description:desc,
             Status:status,
@@ -87,12 +83,10 @@ class Firebase{
            Status: "INPROGRESS",
            ProjectDate: new Date(),
          }, {merge: true});
-        console.log(userRef)
     }
 
     async updateTicketDoc(id, title, desc,priority, status, docId){
         this.db.collection('projects').doc(id).collection('MyTickets').doc(`${docId}`).update({
-            // id:docId,
             Title:title,
             Description:desc,
             Priority:priority,
@@ -102,7 +96,7 @@ class Firebase{
      }
     async createNotificationTicketDoc(id, title, desc, priority, docId){
         if(!id) return;
-        const userRef = this.db.collection('projects').doc(id).collection('Notification').doc(`${docId}`).set({
+        this.db.collection('projects').doc(id).collection('Notification').doc(`${docId}`).set({
             id:docId,
             Title:title,
             Description:desc,
@@ -110,7 +104,6 @@ class Firebase{
             Status: "INPROGRESS",
             ProjectDate: new Date(),
           }, {merge: true});
-         console.log(userRef)
 
     }
 
@@ -120,11 +113,9 @@ class Firebase{
     readCookie = () =>{
         const user = Cookies.get("user")
         if(user){
-            console.log("hii")
             this.isauthenticated = true
             return true
         }else{
-            console.log("bye")
             this.isauthenticated = false
             return false
         }

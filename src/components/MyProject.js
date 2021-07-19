@@ -7,41 +7,32 @@ import firebase from './firebase';
 
 
 function MyProject({allUser, snapshot, currentUserId}) {
-    // console.log("myu",allUser)
-
 
     const [currentUser, setCurrentUser] = useState(snapshot.Role)
     const [openForm, setForm] = useState(false)
     const [data, setData] = useState([])
     let response = []
     useEffect(() => {
-        // console.log("wefbra;sibvriubvrwiuabviruvbr eiubrsvirobnreoibriobreioe")
         const loadProject= async () => {
             try{
                 await firebase.db.collection('projects').doc(currentUserId).collection('MyProjects').get().then((querySnapshot) => {
                     querySnapshot.forEach((doc) =>{
                         response.push(doc.data())
-                        // console.log("proj",doc.data());
-
                     })
                     setData(response)
                 })
-                // console.log("res",response)
             }catch(e){
-                // console.log(e.messege);
             }
         }
         loadProject()
     }, []);
 
     
-    // console.log("dataaaaaaaaaaaaaaaa", data)
     return (
         <>
            <div style={{
             display:"flex",
             flexDirection:"column",
-            // border:"black solid",
             margin:"50px",
             width:"100%",
             padding:"20px",
@@ -56,7 +47,6 @@ function MyProject({allUser, snapshot, currentUserId}) {
                     display:"flex",
                     justifyContent:"center",
                     flexDirection:"column",
-                    // border:"black solid",
                     padding:"10px",
                 }}><h1 style={{
                     margin:"25px",
@@ -73,7 +63,6 @@ function MyProject({allUser, snapshot, currentUserId}) {
                 </div>
            </div>
            <div style={{
-            //    border:"1px black solid",
                margin:"4px 4px",
                backgroundColor:"#fff",
                width:"100%",
